@@ -1,0 +1,29 @@
+package Lab8.Ex8;
+
+import java.sql.*;
+
+public class addBatch {
+    public static void main(String[] args) {
+        try (
+                Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/ebookshop", "root", "");
+                Statement stmt = conn.createStatement();
+        ) {
+            conn.setAutoCommit(false);
+            stmt.addBatch("insert into books values(8001, 'Java ABC', 'Kevin Jones', 1.1, 99)");
+            stmt.addBatch("Insert into books values (8002, 'Java XYZ', 'Kevin Jones', 1.1, 99)");
+            stmt.addBatch("update books set price = 11.11 where id = 8001 or id = 8002");
+            int[] returnCodes = stmt.executeBatch();
+
+            System.out.print("Return codes are: ");
+            for(int code: returnCodes) {
+                System.out.printf(code + ",");
+            }
+            System.out.println();
+            conn.commit();
+
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
