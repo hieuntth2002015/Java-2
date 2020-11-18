@@ -12,7 +12,7 @@ public class StudentClass {
                 //Step2
                 Statement stmt = conn.createStatement()
         ) {
-            String sqlInsert = "insert into Students values (" + " '" + student.getStudentID() + "', '"  + student.getStudentName() + "', '"  + student.getAddress() + "', '"+ student.getPhone()+ "'" +")";
+            String sqlInsert = "insert into student values (" + " '" + student.getStudentID() + "', '"  + student.getStudentName() + "', '"  + student.getAddress() + "', '"+ student.getPhone()+ "'" +")";
             System.out.println("The SQL statement is: " + sqlInsert + "\n");
             int countInserted = stmt.executeUpdate(sqlInsert);
             System.out.println(countInserted + " records inserted.\n");
@@ -30,7 +30,7 @@ public class StudentClass {
                 Statement stmt = conn.createStatement()
         ){
             System.out.println("============================================================================");
-            ResultSet rset = stmt.executeQuery("select * from Students");
+            ResultSet rset = stmt.executeQuery("select * from student");
             ResultSetMetaData rsetMD = rset.getMetaData();
             int numColumns = rsetMD.getColumnCount();
 
